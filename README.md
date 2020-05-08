@@ -17,6 +17,13 @@ python experiments.py -t fashion -l l21 -q 1 -r 5 -m 10 -z 1
 python experiments.py -t 20news -l l21 -q 1 -r 5 -m 10 -z 1
 python experiments.py -t reuters -l l21 -q 1 -r 5 -m 10 -z 1
 ```
+
+Links for preprocessed data:
+Caltech101: https://drive.google.com/open?id=1qSGEy3EMwD7XcndMjJvb-TexAaDwWBy8
+20 Newsgroup: https://drive.google.com/open?id=1Cc53BQF39XT0VWJhDTaRBUopQ6Vg75q_
+Reuters: https://drive.google.com/open?id=11Jg7UewpVRwp40V5yTuKeeARS0K2XMzF
+Tiny Imagenet: https://drive.google.com/open?id=1jfceyTY4SSBxxHE2mohy2rwSjmCZTgNE
+
 ## Citation
 
 The following is the bibtex for citation.

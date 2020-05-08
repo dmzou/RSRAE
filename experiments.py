@@ -16,7 +16,7 @@ from keras.datasets import fashion_mnist
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 tf.logging.set_verbosity(tf.logging.FATAL)
 
-from RSRAE import model.CAE
+from RSRAE.model import CAE
 
 #%% Parser
 
@@ -68,22 +68,22 @@ elif args.true == "caltech101":
     X_test_origin = data["X"]
     y_test_origin = data["y"]
 elif args.true == "tinyimagenet":
-    with open("../../data/tinyimagenet.data", 'rb') as f:
+    with open("../data/tinyimagenet.data", 'rb') as f:
         data = pickle.load(f)
     X_test_origin = data["X"]
     y_test_origin = data["y"]
 elif args.true == "tinyimagenetvar":
-    with open("../../data/tinyimagenetvar.data", 'rb') as f:
+    with open("../data/tinyimagenetvar.data", 'rb') as f:
         data = pickle.load(f)
     X_test_origin = data["Xvar"]
     y_test_origin = data["y"]
 elif args.true == "20news":
-    with open("../../data/20news.data", 'rb') as f:
+    with open("../data/20news.data", 'rb') as f:
         data = pickle.load(f)
     X_test_origin = data["X"]
     y_test_origin = data["y"]
 elif args.true == "reuters":
-    with open("../../data/reuters.data", 'rb') as f:
+    with open("../data/reuters.data", 'rb') as f:
         data = pickle.load(f)
     X_test_origin = data["X"]
     y_test_origin = data["y"]

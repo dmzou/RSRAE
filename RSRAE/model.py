@@ -1,4 +1,5 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+from tensorflow.keras.layers import BatchNormalization
 import numpy as np
 
 class CAE:
@@ -59,27 +60,27 @@ class CAE:
                 z = tf.layers.conv2d(z, self.hidden_layer_sizes[0], kernel_size=5, strides=2, padding='same', 
                                      activation=self.activation, name="conv1")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.conv2d(z, self.hidden_layer_sizes[1], kernel_size=5, strides=2, padding='same', 
                                      activation=self.activation, name="conv2")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.conv2d(z, self.hidden_layer_sizes[2], kernel_size=3, strides=2, padding=self.pad3,
                                      activation=self.activation, name="conv3")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
         else:
             with tf.variable_scope("encoder"):
                 z = x
                 z = tf.layers.dense(z, self.hidden_layer_sizes[0], activation=self.activation, name="fc1")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.dense(z, self.hidden_layer_sizes[1], activation=self.activation, name="fc2")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.dense(z, self.hidden_layer_sizes[2], activation=self.activation, name="fc3")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
         return z
     
     def rsr(self, y):
@@ -105,15 +106,15 @@ class CAE:
                                     activation=self.activation, name="revealed")
                 z = tf.reshape(z, (-1, int(self.input_shape[0]/8), int(self.input_shape[0]/8), self.hidden_layer_sizes[2]))
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.conv2d_transpose(z, self.hidden_layer_sizes[1], kernel_size=3, strides=2, padding=self.pad3,
                                               activation=self.activation, name="deconv3")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.conv2d_transpose(z, self.hidden_layer_sizes[0], kernel_size=5, strides=2, padding='same',
                                               activation=self.activation, name="deconv2")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 x = tf.layers.conv2d_transpose(z, self.input_shape[2], kernel_size=5, strides=2, padding='same',
                                               activation=self.activation, 
                                               name="deconv1")
@@ -121,13 +122,13 @@ class CAE:
             with tf.variable_scope("decoder"):
                 z = tf.layers.dense(z, self.hidden_layer_sizes[2], activation=self.activation, name="revealed")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.dense(z, self.hidden_layer_sizes[1], activation=self.activation, name="dfc3")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 z = tf.layers.dense(z, self.hidden_layer_sizes[0], activation=self.activation, name="dfc2")
                 if self.bn:
-                    z = tf.layers.batch_normalization(z)
+                    z = BatchNormalization()(z)
                 x = tf.layers.dense(z, self.input_shape[0], activation=self.activation, name="dfc1")
         return x
 

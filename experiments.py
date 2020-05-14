@@ -10,7 +10,7 @@ from sklearn.metrics import roc_auc_score, average_precision_score
 import pickle
 import argparse
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from keras.datasets import fashion_mnist
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
@@ -26,7 +26,7 @@ parser.add_argument("-g", "--gpu",
                     default="0")
 parser.add_argument("-t", "--true",
                     help="specify normal data (caltech101/fashion/20news/reuters)",
-                    default="20news")
+                    default="fashion")
 parser.add_argument("-l", "--loss",
                     help="specify loss norm type",
                     default="L21")
@@ -35,7 +35,7 @@ parser.add_argument("-a", "--lambda1", type=float,
                     default=0.0025)
 parser.add_argument("-r", "--num2run", type=int,
                     help="specify number of runs for each setting",
-                    default=5)
+                    default=1)
 parser.add_argument("-q", "--enforce_proj",
                     help="whether enforce projection",
                     default="1")

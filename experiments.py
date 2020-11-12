@@ -123,13 +123,13 @@ if __name__ == "__main__":
     num_experiments = args.num2run
    
     if args.true in ("fashion", "tinyimagenet", "tinyimagenetvar"):
-        anomaly_set = list(range(10))
+        inliers_set = list(range(10))
     elif args.true == "caltech101":
-        anomaly_set = list(range(11))
+        inliers_set = list(range(11))
     elif args.true == "20news":
-        anomaly_set = list(range(20))
+        inliers_set = list(range(20))
     elif args.true == "reuters":
-        anomaly_set = list(range(5))
+        inliers_set = list(range(5))
 
     for cvalue in (0.1, 0.3, 0.5, 0.7, 0.9):
         
@@ -141,7 +141,7 @@ if __name__ == "__main__":
         to_save_std_time[cvalue] = {}
         
         
-        for anomaly in anomaly_set:
+        for inlier_class in inliers_set:
             
             with open(filename, 'a') as f_log:
                 f_log.write("Anomaly digit: "+str(anomaly)+"; c: "+str(cvalue) + "\n")
@@ -158,7 +158,7 @@ if __name__ == "__main__":
                 num_pure = 360 
             num_anomaly = int( num_pure * cvalue )
            
-            y_test = (np.array(y_test_origin) == anomaly).astype(int)
+            y_test = (np.array(y_test_origin) == inlier_class).astype(int)
                 
             X_test_normal = X_test_origin[y_test==1]
             X_test_anomaly = X_test_origin[y_test==0][0:num_anomaly]
@@ -166,7 +166,6 @@ if __name__ == "__main__":
                 
             y_test_normal = y_test[y_test==1]
             y_test_anomaly = y_test[y_test==0][0:num_anomaly]
-            y_test = np.concatenate((y_test_normal, y_test_anomaly))                
             y_test = [False] * len(X_test_normal) + [True] * num_anomaly
             
             if args.true == "fashion":
@@ -249,12 +248,12 @@ if __name__ == "__main__":
             std_ap = np.std(aps)
             std_time = np.std(time_elapses)
 
-            to_save_auc[cvalue][anomaly] = aucs
-            to_save_ap[cvalue][anomaly] = aps
-            to_save_time[cvalue][anomaly] = time_elapses
-            to_save_std_auc[cvalue][anomaly] = std_auc
-            to_save_std_ap[cvalue][anomaly] = std_ap
-            to_save_std_time[cvalue][anomaly] = std_time
+            to_save_auc[cvalue][inlier_class] = aucs
+            to_save_ap[cvalue][inlier_class] = aps
+            to_save_time[cvalue][inlier_class] = time_elapses
+            to_save_std_auc[cvalue][inlier_class] = std_auc
+            to_save_std_ap[cvalue][inlier_class] = std_ap
+            to_save_std_time[cvalue][inlier_class] = std_time
 
 
             with open(filename, 'a') as f_log:

@@ -144,9 +144,9 @@ if __name__ == "__main__":
         for inlier_class in inliers_set:
             
             with open(filename, 'a') as f_log:
-                f_log.write("Anomaly digit: "+str(anomaly)+"; c: "+str(cvalue) + "\n")
+                f_log.write("Inlier digit: "+str(inlier_class)+"; c: "+str(cvalue) + "\n")
 
-            print("Anomaly digit: "+str(anomaly)+"; c: "+str(cvalue))
+            print("Inlier digit: "+str(inlier_class)+"; c: "+str(cvalue))
             
             if args.true == "fashion":
                 num_pure = 1000
